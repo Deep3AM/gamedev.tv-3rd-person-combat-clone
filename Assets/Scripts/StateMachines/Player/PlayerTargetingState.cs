@@ -18,7 +18,12 @@ public class PlayerTargetingState : PlayerBaseState
     }
     public override void Tick(float deltaTime)
     {
-        if(stateMachine.InputReader.IsAttacking)
+        if (stateMachine.InputReader.IsBlocking)
+        {
+            stateMachine.SwitchState(new PlayerBlockingState(stateMachine)) ;
+            return;
+        }
+        if (stateMachine.InputReader.IsAttacking)
         {
             stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
             return;

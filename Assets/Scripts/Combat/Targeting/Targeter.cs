@@ -39,7 +39,7 @@ public class Targeter : MonoBehaviour
         foreach (Target target in targets)
         {
             Vector2 viewPos = mainCamera.WorldToViewportPoint(target.transform.position);//near to camera center vector2
-            if (viewPos.x<0||viewPos.x>1||viewPos.y<0||viewPos.y>1)
+            if (!target.GetComponentInChildren<Renderer>().isVisible)//화면에 보이는 것만 타게팅가능함
             {
                 continue;//if target is not in screen, continuel
             }

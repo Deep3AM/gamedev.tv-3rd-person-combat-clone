@@ -26,4 +26,17 @@ public abstract class PlayerBaseState : State
         lookPos.y = 0f;
         stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
     }
+    protected void ReturnToLocomotion()//플레이어가 애니메이션이 이전으로 돌아갈때 타겟팅 상태인지 아닌지 확인하고 돌아감
+    {
+        if(stateMachine.Targeter.CurrentTarget != null)
+        {
+            stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+        }
+        else
+        {
+            stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+
+        }
+    }
+
 }

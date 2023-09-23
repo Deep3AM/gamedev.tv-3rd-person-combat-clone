@@ -7,6 +7,7 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] private Collider myCollider;
     private List<Collider> alreadyCollideWith = new List<Collider>();
     private int damage;
+    private float knockBack;
     private void OnEnable()
     {
         alreadyCollideWith.Clear();
@@ -21,11 +22,18 @@ public class WeaponDamage : MonoBehaviour
         alreadyCollideWith.Add(other);
         if (other.TryGetComponent<Health>(out Health health))
         {
+            Debug.Log(other);
             health.DealDamage(damage);
         }
+        if(other.TryGetComponent(out ForceReceiver forceReceiver))
+        {
+            Vector3 direction = (other.transform.position - myCollider.transform.position).normalized;
+            forceReceiver.AddForce(direction * knockBack);//맞은 방향으로 팅겨나가기
+        }
     }
-    public void SetAttack(int damage)
+    public void SetAttack(int damage, float knockBack)
     {
         this.damage = damage;
+        this.knockBack = knockBack;
     }
 }
