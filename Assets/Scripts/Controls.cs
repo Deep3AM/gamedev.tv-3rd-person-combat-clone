@@ -73,15 +73,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Cancel"",
-                    ""type"": ""Button"",
-                    ""id"": ""f0262efa-75d4-4711-b24f-9cf0e50428f7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""5f8992fd-5460-45c0-9ab5-598d15d765d4"",
@@ -312,28 +303,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c4f2259d-7af3-4974-a20f-94a6cf55a588"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse & Keyboard"",
-                    ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""768a2fb8-d234-49ab-baab-84419ba56af5"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""6d93912c-9252-4040-8406-d234716c82c9"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -416,7 +385,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Target = m_Player.FindAction("Target", throwIfNotFound: true);
-        m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
     }
@@ -485,7 +453,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Target;
-    private readonly InputAction m_Player_Cancel;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Block;
     public struct PlayerActions
@@ -497,7 +464,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Target => m_Wrapper.m_Player_Target;
-        public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -524,9 +490,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Target.started += instance.OnTarget;
             @Target.performed += instance.OnTarget;
             @Target.canceled += instance.OnTarget;
-            @Cancel.started += instance.OnCancel;
-            @Cancel.performed += instance.OnCancel;
-            @Cancel.canceled += instance.OnCancel;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -552,9 +515,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Target.started -= instance.OnTarget;
             @Target.performed -= instance.OnTarget;
             @Target.canceled -= instance.OnTarget;
-            @Cancel.started -= instance.OnCancel;
-            @Cancel.performed -= instance.OnCancel;
-            @Cancel.canceled -= instance.OnCancel;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -603,7 +563,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnTarget(InputAction.CallbackContext context);
-        void OnCancel(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
     }

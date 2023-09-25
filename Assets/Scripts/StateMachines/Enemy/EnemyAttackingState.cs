@@ -16,7 +16,7 @@ public class EnemyAttackingState : EnemyBaseState
     }
     public override void Tick(float deltaTime)
     {
-        if(GetNormalizedTime(stateMachine.Animator)>=1)//공격 애니메이션이 끝나면 다시 쫓는 상태로 바꿈
+        if(GetNormalizedTime(stateMachine.Animator,"Attack")>=1)//공격 애니메이션이 끝나면 다시 쫓는 상태로 바꿈
         {
             stateMachine.SwitchState(new EnemyChasingState(stateMachine));
         }

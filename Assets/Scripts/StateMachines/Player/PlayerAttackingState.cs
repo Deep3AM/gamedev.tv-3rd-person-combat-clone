@@ -21,7 +21,7 @@ public class PlayerAttackingState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         Move(deltaTime);   
-        float normalizedTime = GetNormalizedTime(stateMachine.Animator);
+        float normalizedTime = GetNormalizedTime(stateMachine.Animator, "Attack");
         if(normalizedTime>=previousFrameTime&&normalizedTime<1f)//공격을 시작함
         {
             if(normalizedTime>=attack.ForceTime)//공격을 하면서

@@ -13,7 +13,9 @@ public class PlayerTargetingState : PlayerBaseState
     }
     public override void Enter()
     {
-        stateMachine.InputReader.CancelEvent += OnCancel;//to back to free look state
+        stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.DodgeEvent += OnDodge;
+        stateMachine.InputReader.TargetEvent += OnTarget;//to back to free look state
         stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, CrossFadeDuration);
     }
     public override void Tick(float deltaTime)
@@ -33,21 +35,32 @@ public class PlayerTargetingState : PlayerBaseState
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
             return;
         }
-        Vector3 movement = CalculateMovement();
+        Vector3 movement = CalculateMovement(deltaTime);
         Move(movement * stateMachine.TargetingMoveSpeed, deltaTime);
         UpdateAnimator(deltaTime);
         FaceTarget();
     }
     public override void Exit()
     {
-        stateMachine.InputReader.CancelEvent -= OnCancel;
+        stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.TargetEvent -= OnTarget;
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
     }
-    private void OnCancel()
+    private void OnTarget()
     {
         stateMachine.Targeter.Cancel();
         stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
     }
-    private Vector3 CalculateMovement()
+    private void OnDodge()
+    {
+        if(stateMachine.InputReader.MovementValue==Vector2.zero) { return; }
+        stateMachine.SwitchState(new PlayerDodgingState(stateMachine,stateMachine.InputReader.MovementValue));//이동방향 입력
+    }
+    private void OnJump()
+    {
+        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
+    }
+    private Vector3 CalculateMovement(float deltaTime)
     {
         Vector3 movement = new Vector3();
         movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;

@@ -51,15 +51,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Cancel",
-                    "type": "Button",
-                    "id": "f0262efa-75d4-4711-b24f-9cf0e50428f7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "5f8992fd-5460-45c0-9ab5-598d15d765d4",
@@ -285,28 +276,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Target",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c4f2259d-7af3-4974-a20f-94a6cf55a588",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse & Keyboard",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "768a2fb8-d234-49ab-baab-84419ba56af5",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

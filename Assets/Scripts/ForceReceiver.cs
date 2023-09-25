@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,5 +37,15 @@ public class ForceReceiver : MonoBehaviour
         {
             agent.enabled = false;
         }
+    }
+    public void Jump(float jumpForce)
+    {
+        verticalVelocity += jumpForce;
+    }
+
+    internal void Reset()
+    {
+        impact = Vector3.zero;
+        verticalVelocity = 0f;
     }
 }
